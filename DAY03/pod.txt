@@ -179,5 +179,29 @@ tomcat
 Jenkins
 
 mongo
+--------------------------------------------------------------------------------------------------------------
+IF VS code server not connected follow this steps.
 
+1. Clean the Old "Fingerprints"
+Production environments get messy when IPs are reused. Since you’ve been trying many different hostnames, your computer's "memory" is likely clogged with conflicting keys for 54.157.235.79.
 
+Open Git bash (as Administrator).
+
+Run this command to completely wipe that IP from your known hosts:
+Git bash:
+C: ssh-keygen -R 54.157.235.79    :you’ve officially cleared the "old memory" of that server. This is exactly what a Senior SRE would do when an IP address gets recycled for a new project.
+
+. Perform a "Manual Handshake"
+VS Code's background script is not designed to answer questions. You must answer the security question manually before VS Code attempts to connect.
+
+In your terminal, run the connection manually:
+C: ssh -i "C:\Users\pathw\Downloads\sindhu-key-pair.pem" ubuntu@54.157.235.79
+When it asks: Are you sure you want to continue connecting (yes/no/[fingerprint])?
+
+Type yes and hit Enter.
+
+3. . Simplify the VS Code Config.
+Host k8s-master
+    HostName 54.157.235.79
+    User ubuntu
+    IdentityFile "C:\Users\pathw\Downloads\sindhu-key-pair.pem"
